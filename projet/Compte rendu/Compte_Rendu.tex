@@ -1,0 +1,86 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc} % Encodage UTF-8
+\usepackage[T1]{fontenc}    % Encodage des caractères
+\usepackage[francais]{babel} % Langue française
+\usepackage{geometry}       % Mise en page
+\usepackage{graphicx}       % Inclusion d'images
+\usepackage{hyperref}       % Hyperliens
+\usepackage{fancyhdr}       % En-têtes et pieds de page
+\usepackage{titlesec}       % Personnalisation des sections
+\usepackage{enumitem}       % Personnalisation des listes
+
+% Configuration de la mise en page
+\geometry{margin=2.5cm}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textbf{Compte Rendu}} % Titre en en-tête gauche
+\fancyhead[R]{\thepage}             % Numéro de page à droite
+\fancyfoot[L]{Nom du projet}        % Pied de page gauche
+\fancyfoot[R]{\today}               % Date à droite
+
+% Configuration des sections
+\titleformat{\section}{\large\bfseries}{\thesection.}{1em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection.}{1em}{}
+\titleformat{\subsubsection}{\small\bfseries}{\thesubsubsection.}{1em}{}
+
+\setlist[itemize]{label=--, left=0cm}
+
+\begin{document}
+
+% Page de titre
+\begin{titlepage}
+    \centering
+    \includegraphics[width=0.2\textwidth]{logo.png} \\ % Logo (à personnaliser)
+    \vspace{1cm}
+    {\Large \textbf{Compte Rendu}} \\[0.5cm]
+    {\large \textbf{Nom du projet ou sujet}} \\[1.5cm]
+    \begin{tabbing}
+        \hspace{3cm} \= \textbf{Date :} \hspace{0.5cm} \= \today \\[0.2cm]
+        \> \textbf{Responsable :} \> Nom du responsable \\[0.2cm]
+        \> \textbf{Participants :} \> Liste des participants \\[0.2cm]
+        \> \textbf{Lieu :} \> Lieu de la réunion \\[0.2cm]
+        \> \textbf{Durée :} \> Durée approximative
+    \end{tabbing}
+    \vfill
+\end{titlepage}
+
+% Introduction
+\section*{Introduction}
+Décrivez brièvement l'objectif de la réunion ou du projet, ainsi que les points importants à traiter.
+
+% Ordre du jour
+\section*{Ordre du jour}
+\begin{itemize}
+    \item Point 1 : Description du point.
+    \item Point 2 : Description du point.
+    \item Point 3 : Description du point.
+\end{itemize}
+
+% Développement
+\section{Déroulement et discussions}
+\subsection{Point 1 : [Nom du point]}
+Résumé des discussions, décisions prises, et points à suivre.
+
+\subsection{Point 2 : [Nom du point]}
+Résumé des discussions, décisions prises, et points à suivre.
+
+\subsection{Point 3 : [Nom du point]}
+Résumé des discussions, décisions prises, et points à suivre.
+
+% Actions à entreprendre
+\section{Actions à entreprendre}
+\begin{itemize}
+    \item \textbf{Action 1 :} Description, responsable, et échéance.
+    \item \textbf{Action 2 :} Description, responsable, et échéance.
+    \item \textbf{Action 3 :} Description, responsable, et échéance.
+\end{itemize}
+
+% Conclusion
+\section*{Conclusion}
+Résumé global, rappel des actions prioritaires, et prochaines étapes (si applicable).
+
+% Annexe (optionnel)
+\section*{Annexes}
+Ajoutez des documents supplémentaires, graphiques ou détails techniques si nécessaire.
+
+\end{document}
