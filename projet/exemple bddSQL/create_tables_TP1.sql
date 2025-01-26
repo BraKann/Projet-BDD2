@@ -1,4 +1,5 @@
 -- @create_tables_TP1.sql
+--test modif
 spool create_tables_TP1.log
 
 prompt *************************************************************
