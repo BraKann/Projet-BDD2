@@ -14,6 +14,7 @@ prompt *************************************************************
 INSERT INTO RESEAUTAN (ligne_id, ligne_nom, ligne_type, arret_id, arret_nom, vehicule_id, vehicule_type, capacite, carburant_type, accessibilité_fonctionnalite) 
 VALUES
 (1, 'Ligne 1', 'Rail', 1, 'Commerce', 101, 'Tramway', 250 , 'Électrique', 'Rampe d’accès'),
+(1, 'Ligne 1', 'Rail', 3, 'Hôtel Dieu', 102, 'Tramway', 260 , 'Électrique', 'Rampe d’accès'),
 (2, 'Ligne 2', 'Rail', 2, 'Beaujoire', 102, 'Tramway', 250 , 'Électrique', 'Rampe d’accès'),
 (3, 'C5', 'Route', 3, 'Hôtel Dieu', 201, 'Bus', 50, 'Gaz_Naturel', 'Rampe d’accès'),
 (4, 'N1', 'Fluviales', 4, 'Gare Maritime', 301, 'Navibus', 95, 'Diesel', 'Rampe d’accès'),
