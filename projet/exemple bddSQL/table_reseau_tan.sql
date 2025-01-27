@@ -22,19 +22,19 @@ CREATE TABLE RESEAUTAN (
     vehicule_type VARCHAR(50),
     capacite NUMBER,
     carburant_type VARCHAR(50),
-    accessibilité_fonctionnalite VARCHAR(255),
+    accessibilite VARCHAR(255),
 
     --PRIMARY KEY (line_id, station_id, vehicle_id)
     --CONSTRAINT pk_reseauxtan PRIMARY KEY(ligne_id,arret_id,vehicle_id)
 
-    --DF : line_id → line_name, line_type
-    -- station_id → station_name
-    -- vehicle_id → vehicle_type, capacity, energy_type, accessibility_features
-    -- line_id, station_id → station_name
-    -- line_id, vehicle_id → vehicle_type, capacity, energy_type, accessibility_features
-    -- fonctionne avec nimporte quel couple ou triple de id
+    --DF : ligne_id → ligne_nom, ligne_type
+    -- arret_id → arret_nom
+    -- vehicule_id → vehicule_type, capacite, carburant_type, accessibilite
+    -- line_id, arret_id → arret_nom
+    -- ligne_id, vehicule_id → vehicule_type, capacite, carburant_type, accessibilite
     -- capacite -> vehicule_type (mais changera si on met le model des vehicule)
 
+    
     --kilometrage
     --annee mise en service
     --heure service de la ligne
