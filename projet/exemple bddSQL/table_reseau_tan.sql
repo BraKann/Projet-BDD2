@@ -21,7 +21,7 @@ CREATE TABLE RESEAUTAN (
     vehicule_id NUMBER,
     vehicule_type VARCHAR(50),
     capacite NUMBER,
-    carburant_type VARCHAR(50),
+    carburant VARCHAR(50),
     accessibilite VARCHAR(255),
 
     --PRIMARY KEY (line_id, station_id, vehicle_id)
@@ -33,10 +33,10 @@ CREATE TABLE RESEAUTAN (
     -- ligne_id, arret_id → arret_nom;
     -- capacite → vehicule_type; (mais changera si on met le model des vehicule)
     -- ligne_nom → ligne_id, ligne_type;
-    -- ligne_id, arret_id, vehicule_id → vehicule_type, capacite, carburant_type, accessibilite;
-    -- ligne_id, vehicule_id → vehicule_type, capacite, carburant_type, accessibilite;
-    -- arret_id, vehicule_id → vehicule_type, capacite, carburant_type, accessibilite;
-    -- vehicule_id → vehicule_type, capacite, carburant_type, accessibilite;
+    -- ligne_id, arret_id, vehicule_id → vehicule_type, capacite, carburant, accessibilite;
+    -- ligne_id, vehicule_id → vehicule_type, capacite, carburant, accessibilite;
+    -- arret_id, vehicule_id → vehicule_type, capacite, carburant, accessibilite;
+    -- vehicule_id → vehicule_type, capacite, carburant, accessibilite;
 
     -- arret_nom → arret_id (on ne la garde pas car en réalité il y a plusieurs arrêts qui ont le même nom)
     
