@@ -30,13 +30,15 @@ CREATE TABLE RESEAUTAN (
     --DF : 
     -- ligne_id → ligne_nom, ligne_type;
     -- arret_id → arret_nom;
-    -- line_id, arret_id → arret_nom;
-    -- capacite -> vehicule_type; (mais changera si on met le model des vehicule)
-
+    -- ligne_id, arret_id → arret_nom;
+    -- capacite → vehicule_type; (mais changera si on met le model des vehicule)
+    -- ligne_nom → ligne_id, ligne_type;
     -- ligne_id, arret_id, vehicule_id → vehicule_type, capacite, carburant_type, accessibilite;
     -- ligne_id, vehicule_id → vehicule_type, capacite, carburant_type, accessibilite;
     -- arret_id, vehicule_id → vehicule_type, capacite, carburant_type, accessibilite;
     -- vehicule_id → vehicule_type, capacite, carburant_type, accessibilite;
+
+    -- arret_nom → arret_id (on ne la garde pas car en réalité il y a plusieurs arrêts qui ont le même nom)
     
 
     -- Potentielles améliorations pour ajout des attributs :
