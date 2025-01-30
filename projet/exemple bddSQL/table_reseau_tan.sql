@@ -37,8 +37,8 @@ CREATE TABLE RESEAUTAN (
     -- ligne_id, vehicule_id → vehicule_type, capacite, carburant, accessibilite;
     -- arret_id, vehicule_id → vehicule_type, capacite, carburant, accessibilite;
     -- vehicule_id → vehicule_type, capacite, carburant, accessibilite;
+    
     -- arret_id → ligne_type (elle ne répresente pas la realité)
-
     -- arret_nom → arret_id (on ne la garde pas car en réalité il y a plusieurs arrêts qui ont le même nom)
     
 
