@@ -11,9 +11,8 @@ prompt *************************************************************
 prompt ******************** INSERT TUPLES **************************
 prompt *************************************************************
 
-INSERT INTO RESEAUTAN (ligne_id, ligne_nom, ligne_type, arret_id, arret_nom, vehicule_id, vehicule_type, capacite, carburant_type, accessibilité_fonctionnalite) 
-VALUES
---ligne_id  ligne_nom              ligne_type   arret_id    arret_nom     vehicule_id  vehicule_type   capacite  carburant_type  accessibilité_fonctionnalite
+INSERT INTO RESEAUTAN (ligne_id, ligne_nom, ligne_type, arret_id, arret_nom, vehicule_id, vehicule_type, capacite, carburant_type, accessibilité) VALUES
+--ligne_id  ligne_nom              ligne_type   arret_id    arret_nom     vehicule_id  vehicule_type   capacite  carburant_type  accessibilité
     (1,     'Ligne 1',            'Rail',         1,       'Commerce',           101,   'Tramway',      250 ,  'Électrique',    'Rampe d’accès'),
     (1,     'Ligne 1',            'Rail',         3,       'Hôtel Dieu',         102,   'Tramway',      250 ,  'Électrique',    'Rampe d’accès'),
     (2,     'Ligne 2',            'Rail',         2,       'Beaujoire',          102,   'Tramway',      250 ,  'Électrique',    'Rampe d’accès'),
