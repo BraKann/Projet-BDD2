@@ -33,7 +33,6 @@ CREATE TABLE VEHICULE (
     accessibilite VARCHAR(255),
 
     PRIMARY KEY (vehicule_id)
-    --CONSTRAINT pk_reseauxtan PRIMARY KEY(ligne_id,arret_id,vehicle_id)
 );
 
 CREATE TABLE ARRET (
@@ -41,16 +40,16 @@ CREATE TABLE ARRET (
     arret_nom VARCHAR(255),
 
     PRIMARY KEY (arret_id)
-    --CONSTRAINT pk_reseauxtan PRIMARY KEY(ligne_id,arret_id,vehicle_id)
 );
 
 CREATE TABLE RESEAUX (
     ligne_id NUMBER,
     arret_id NUMBER,
     vehicule_id NUMBER,
-
+    CONSTRAINT fk_ligne FOREIGN KEY (ligne_id) REFERENCES LIGNE(ligne_id),
+    CONSTRAINT fk_arret FOREIGN KEY (arret_id) REFERENCES ARRET(arret_id),
+    CONSTRAINT fk_vehicule FOREIGN KEY (vehicule_id) REFERENCES VEHICULE(vehicule_id)
     PRIMARY KEY (ligne_id, arret_id, vehicule_id)
-    --CONSTRAINT pk_reseauxtan PRIMARY KEY(ligne_id,arret_id,vehicle_id)
 );
 
 spool off

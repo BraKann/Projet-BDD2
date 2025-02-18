@@ -1,18 +1,3 @@
--- @tuples_reseau_tan.sql
-spool tuples_reseau_tan.log
-
-prompt *************************************************************
-prompt ******************** DELETE TABLE *****************************
-prompt *************************************************************
-
-DELETE FROM RESEAUX;
-DELETE FROM LIGNE;
-DELETE FROM ARRET;
-DELETE FROM VEHICULE;
-
-prompt *************************************************************
-prompt ******************** INSERT TUPLES **************************
-prompt *************************************************************
 
 INSERT INTO LIGNE VALUES (1,'Ligne 1','Rail');
 INSERT INTO LIGNE VALUES (2,'Ligne 2','Rail');
@@ -59,5 +44,23 @@ INSERT INTO RESEAUX VALUES (7, 8, 303);
 INSERT INTO RESEAUX VALUES (8, NULL, 501);
 INSERT INTO RESEAUX VALUES (9, 9, 202);
 INSERT INTO RESEAUX VALUES (10, 10, 402);
-
     
+-- Sélectionner toutes les données de la table LIGNE
+SELECT * FROM LIGNE;
+
+-- Sélectionner toutes les données de la table VEHICULE
+SELECT * FROM VEHICULE;
+
+-- Sélectionner toutes les données de la table ARRET
+SELECT * FROM ARRET;
+
+-- Sélectionner toutes les données de la table RESEAUX
+SELECT * FROM RESEAUX;
+
+-- Sélectionner les vehicules qui ont une capacité supérieure à 100 et qui passent par l'arret 'Commerce'
+SELECT * FROM VEHICULE V
+JOIN RESEAUX R ON V.vehicule_id = R.vehicule_id
+JOIN ARRET A ON R.arret_id = A.arret_id
+WHERE A.arret_nom = 'Commerce' AND V.capacite > 100;
+
+
