@@ -1,8 +1,8 @@
---requete 1 : Recuperer tout les vehicules de plus de 100 de capacité qui passe par un arret donner + une selection
+--requete 1 : Recuperer tout les vehicules de plus de 100 de capacité qui passe par l'arret Commerce + une selection
   --version 1 : 
-select vehicule_id,arret_nom
-from vehicule natural join arret
-where arret_nom = ""
+SELECT vehicule_id,arret_nom
+FROM vehicule natural join arret
+WHERE arret_nom = "Commerce"
 
   
   --version 2 :
@@ -10,36 +10,52 @@ where arret_nom = ""
 
   --version 3 :
   
---requete 2 :
+--requete 2 : Une requête pour trouver tous les véhicules électriques et leur capacité
   --version 1 :
-
+SELECT v.vehicule_id, v.type, v.capacite, v.equipements
+FROM Vehicules v
+WHERE v.energie = 'Électrique'
+ORDER BY v.capacite DESC;
   
   --version 2 :
 
 
   --version 3 :
 
---requete 3 :
+--requete 3 : Une requête pour compter le nombre de véhicules par type d'énergie
   --version 1 :
-
+SELECT energie, COUNT(*) as nombre_vehicules
+FROM Vehicules
+GROUP BY energie
+ORDER BY nombre_vehicules DESC;
   
   --version 2 :
 
 
   --version 3 :
 
---requete 4 :
+--requete 4 : Une requête pour lister toutes les lignes avec leurs arrêts et véhicules associés
   --version 1 :
-
+SELECT l.ligne_id, l.nom_ligne, l.type_voie, a.nom_arret, v.type, v.energie
+FROM Lignes l
+JOIN Reseaux r ON l.ligne_id = r.ligne_id_FK
+JOIN Arrets a ON r.arret_id_FK = a.arret_id
+JOIN Vehicules v ON r.vehicule_id_FK = v.vehicule_id
+ORDER BY l.ligne_id;
   
   --version 2 :
 
 
   --version 3 :
 
---requete 5 :
+--requete 5 : Une requête pour trouver les arrêts desservis par des véhicules fluviaux (Navibus)
   --version 1 :
-
+SELECT DISTINCT a.arret_id, a.nom_arret
+FROM Arrets a
+JOIN Reseaux r ON a.arret_id = r.arret_id_FK
+JOIN Vehicules v ON r.vehicule_id_FK = v.vehicule_id
+WHERE v.type = 'Navibus'
+ORDER BY a.nom_arret;
   
   --version 2 :
 
