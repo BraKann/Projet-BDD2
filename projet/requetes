@@ -1,4 +1,4 @@
---requete 1 : Recuperer tout les vehicules de plus de 100 de capacité qui passe par un arret donner 
+--requete 1 : Recuperer tout les vehicules de plus de 100 de capacité qui passe par un arret donner + une selection
   --version 1 : 
 select vehicule_id,arret_nom
 from vehicule natural join arret
