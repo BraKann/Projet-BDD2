@@ -1,0 +1,53 @@
+-- @projet_Bernstein.sql
+spool projet_Bernstein.log
+
+prompt *************************************************************
+prompt ******************** DROP TABLE *****************************
+prompt *************************************************************
+
+DROP TABLE Vehicules CASCADE CONSTRAINTS;
+DROP TABLE Lignes CASCADE CONSTRAINTS;
+DROP TABLE Arrets CASCADE CONSTRAINTS;
+DROP TABLE Reseaux CASCADE CONSTRAINTS;
+
+prompt *************************************************************
+prompt ******************** CREATE TABLE ***************************
+prompt *************************************************************
+
+-- Normalisation Bernstein clé choisie: ADF
+
+CREATE TABLE Vehicules (
+	vehicule_id 	NUMBER	PRIMARY KEY,
+	vehicule_type	VARCHAR2(20),
+	capacite	NUMBER,
+	carburant	VARCHAR2(15),
+	accessibilite	VARCHAR2(35)
+);
+
+CREATE TABLE Lignes (
+	ligne_id	NUMBER PRIMARY KEY,
+	ligne_nom	VARCHAR2(10),
+	ligne_type	VARCHAR2(15)
+);
+
+CREATE TABLE Arrets (
+	arret_id	NUMBER PRIMARY KEY,
+	arret_nom	VARCHAR2(20)
+);
+
+CREATE TABLE VehiculeCapacite (
+	capacite	NUMBER PRIMARY KEY,
+	vehicule_type	VARCHAR2(20)
+);
+
+CREATE TABLE Reseaux (
+	arret_id_FK	NUMBER,
+	ligne_id_FK	NUMBER,
+	vehicule_id_FK	NUMBER,
+	CONSTRAINT fk_arret FOREIGN KEY (arret_id_FK) REFERENCES Arrets(arret_id_FK),
+	CONSTRAINT fk_ligne FOREIGN KEY (ligne_id_FK) REFERENCES Lignes(ligne_id_FK),
+	CONSTRAINT fk_vehicule FOREIGN KEY (vehicule_id_FK) REFERENCES Vehicules(vehicule_id_FK)
+);
+
+
+spool off
