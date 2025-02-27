@@ -1,0 +1,44 @@
+requete 1 :
+  version 1 :
+
+  
+  version 2 :
+
+
+  version 3 :
+  
+requete 2 :
+  version 1 :
+
+  
+  version 2 :
+
+
+  version 3 :
+
+requete 3 :
+  version 1 :
+
+  
+  version 2 :
+
+
+  version 3 :
+
+requete 4 :
+  version 1 :
+
+  
+  version 2 :
+
+
+  version 3 :
+
+requete 5 :
+  version 1 :
+
+  
+  version 2 :
+
+
+  version 3 :
