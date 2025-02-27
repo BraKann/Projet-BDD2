@@ -27,6 +27,20 @@ INSERT INTO Vehicules VALUES (501,	'ProxiTan',	4,	'Diesel',		'Rampe d’accès, 
 INSERT INTO Vehicules VALUES (202,	'Bus',		50,	'Gaz_Naturel',		'Rampe d’accès');
 INSERT INTO Vehicules VALUES (402,	'BusWay',	150,	'Électrique',		'Rampe d’accès, WiFi');
 
+--Lignes
+
+INSERT INTO LIGNE VALUES (1,'Ligne 1','Rail');
+INSERT INTO LIGNE VALUES (2,'Ligne 2','Rail');
+INSERT INTO LIGNE VALUES (3,'C5','Route');
+INSERT INTO LIGNE VALUES (4,'N1','Fluviales');
+INSERT INTO LIGNE VALUES (5,'N3','Fluviales');
+INSERT INTO LIGNE VALUES (6,'Ligne 4','Route');
+INSERT INTO LIGNE VALUES (7,'N2','Fluviales');
+INSERT INTO LIGNE VALUES (8,'Déplacement dédié','Route');
+INSERT INTO LIGNE VALUES (9,'12','Route');
+INSERT INTO LIGNE VALUES (10,'Ligne 5','Route');
+
+
 -- Arrets
 
 INSERT INTO Arrets 				 VALUES (1,	'Commerce');
@@ -43,7 +57,18 @@ INSERT INTO Arrets 				 VALUES (10,	'Hangar a Banane');
 
 
 --VehiculeCapacite
-
+INSERT INTO VehiculeCapacite VALUES (250,	'Tramway');
+INSERT INTO VehiculeCapacite VALUES (250,	'Tramway');
+INSERT INTO VehiculeCapacite VALUES (250,	'Tramway');
+INSERT INTO VehiculeCapacite VALUES (50,	'Bus');
+INSERT INTO VehiculeCapacite VALUES (95,	'Navibus');
+INSERT INTO VehiculeCapacite VALUES (95,	'Navibus');
+INSERT INTO VehiculeCapacite VALUES (95,	'Navibus');
+INSERT INTO VehiculeCapacite VALUES (150,	'BusWay');
+INSERT INTO VehiculeCapacite VALUES (95,	'Navibus');
+INSERT INTO VehiculeCapacite VALUES (4,	'ProxiTan');
+INSERT INTO VehiculeCapacite VALUES (50,	'Bus');
+INSERT INTO VehiculeCapacite VALUES (150,	'BusWay');
 -- Reseaux
 
 INSERT INTO Reseaux 				 VALUES (1,	1,	101);
