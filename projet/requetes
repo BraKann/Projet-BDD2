@@ -3,13 +3,24 @@
 SELECT vehicule_id,arret_nom
 FROM vehicule natural join arret
 WHERE arret_nom = "Commerce"
-
   
   --version 2 :
-
+SELECT v.vehicule_id, a.nom_arret
+FROM Vehicules v
+JOIN Reseaux r ON v.vehicule_id = r.vehicule_id_FK
+JOIN Arrets a ON r.arret_id_FK = a.arret_id
+WHERE a.nom_arret = 'Commerce';
 
   --version 3 :
-  
+  SELECT v.vehicule_id, 'Commerce' as nom_arret
+FROM Vehicules v
+WHERE v.vehicule_id IN (
+    SELECT r.vehicule_id_FK
+    FROM Reseaux r
+    JOIN Arrets a ON r.arret_id_FK = a.arret_id
+    WHERE a.nom_arret = 'Commerce'
+);
+
 --requete 2 : Une requête pour trouver tous les véhicules électriques et leur capacité
   --version 1 :
 SELECT v.vehicule_id, v.type, v.capacite, v.equipements
@@ -18,9 +29,16 @@ WHERE v.energie = 'Électrique'
 ORDER BY v.capacite DESC;
   
   --version 2 :
-
+WITH vehicules_electriques AS (
+    SELECT * FROM Vehicules
+    WHERE energie = 'Électrique'
+)
+SELECT vehicule_id, type, capacite, equipements
+FROM vehicules_electriques
+ORDER BY capacite DESC;
 
   --version 3 :
+
 
 --requete 3 : Une requête pour compter le nombre de véhicules par type d'énergie
   --version 1 :
@@ -30,7 +48,12 @@ GROUP BY energie
 ORDER BY nombre_vehicules DESC;
   
   --version 2 :
-
+SELECT 
+    energie, 
+    (SELECT COUNT(*) FROM Vehicules v2 WHERE v2.energie = v1.energie) as nombre
+FROM Vehicules v1
+GROUP BY energie
+ORDER BY nombre DESC;
 
   --version 3 :
 
@@ -44,9 +67,21 @@ JOIN Vehicules v ON r.vehicule_id_FK = v.vehicule_id
 ORDER BY l.ligne_id;
   
   --version 2 :
-
+SELECT 
+    Lignes.ligne_id, 
+    Lignes.nom_ligne, 
+    Lignes.type_voie, 
+    Arrets.nom_arret, 
+    Vehicules.type, 
+    Vehicules.energie
+FROM Lignes, Reseaux, Arrets, Vehicules
+WHERE Lignes.ligne_id = Reseaux.ligne_id_FK
+AND Arrets.arret_id = Reseaux.arret_id_FK
+AND Vehicules.vehicule_id = Reseaux.vehicule_id_FK
+ORDER BY Lignes.ligne_id;
 
   --version 3 :
+
 
 --requete 5 : Une requête pour trouver les arrêts desservis par des véhicules fluviaux (Navibus)
   --version 1 :
@@ -58,6 +93,19 @@ WHERE v.type = 'Navibus'
 ORDER BY a.nom_arret;
   
   --version 2 :
-
+SELECT DISTINCT Arrets.arret_id, Arrets.nom_arret
+FROM Arrets, Reseaux, Vehicules
+WHERE Arrets.arret_id = Reseaux.arret_id_FK
+AND Reseaux.vehicule_id_FK = Vehicules.vehicule_id
+AND Vehicules.type = 'Navibus'
+ORDER BY Arrets.nom_arret;
 
   --version 3 :
+SELECT DISTINCT a.arret_id, a.nom_arret
+FROM Arrets a
+WHERE EXISTS (
+    SELECT 1 FROM Reseaux r
+    JOIN Vehicules v ON r.vehicule_id_FK = v.vehicule_id
+    WHERE r.arret_id_FK = a.arret_id AND v.type = 'Navibus'
+)
+ORDER BY a.nom_arret;
