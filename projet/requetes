@@ -1,4 +1,4 @@
---requete 1 : Recuperer tout les vehicules de plus de 100 de capacité qui passe par l'arret Commerce + une selection
+--REQUETE 1 : Recuperer tout les vehicules de plus de 100 de capacité qui passe par l'arret Commerce + une selection
   --version 1 : 
 SELECT vehicule_id,arret_nom
 FROM vehicule natural join arret
@@ -21,7 +21,10 @@ WHERE v.vehicule_id IN (
     WHERE a.nom_arret = 'Commerce'
 );
 
---requete 2 : Une requête pour trouver tous les véhicules électriques et leur capacité
+
+
+
+--REQUETE 2 : Une requête pour trouver tous les véhicules électriques et leur capacité
   --version 1 :
 SELECT v.vehicule_id, v.type, v.capacite, v.equipements
 FROM Vehicules v
@@ -38,9 +41,19 @@ FROM vehicules_electriques
 ORDER BY capacite DESC;
 
   --version 3 :
+SELECT 
+    energie as type_energie, 
+    SUM(1) as nombre_vehicules
+FROM Vehicules
+GROUP BY energie
+HAVING COUNT(*) > 0
+ORDER BY nombre_vehicules DESC;
 
 
---requete 3 : Une requête pour compter le nombre de véhicules par type d'énergie
+
+
+
+--REQUETE 3 : Une requête pour compter le nombre de véhicules par type d'énergie
   --version 1 :
 SELECT energie, COUNT(*) as nombre_vehicules
 FROM Vehicules
@@ -56,8 +69,20 @@ GROUP BY energie
 ORDER BY nombre DESC;
 
   --version 3 :
+SELECT l.ligne_id, l.nom_ligne, l.type_voie, a.nom_arret, v.type, v.energie
+FROM Lignes l
+LEFT JOIN Reseaux r ON l.ligne_id = r.ligne_id_FK
+LEFT JOIN Arrets a ON r.arret_id_FK = a.arret_id
+LEFT JOIN Vehicules v ON r.vehicule_id_FK = v.vehicule_id
+WHERE r.ligne_id_FK IS NOT NULL
+ORDER BY l.ligne_id, a.nom_arret;
 
---requete 4 : Une requête pour lister toutes les lignes avec leurs arrêts et véhicules associés
+
+
+
+
+
+--REQUETE 4 : Une requête pour lister toutes les lignes avec leurs arrêts et véhicules associés
   --version 1 :
 SELECT l.ligne_id, l.nom_ligne, l.type_voie, a.nom_arret, v.type, v.energie
 FROM Lignes l
@@ -81,9 +106,22 @@ AND Vehicules.vehicule_id = Reseaux.vehicule_id_FK
 ORDER BY Lignes.ligne_id;
 
   --version 3 :
+SELECT DISTINCT a.arret_id, a.nom_arret
+FROM Arrets a
+INNER JOIN (
+    SELECT arret_id_FK 
+    FROM Reseaux r
+    INNER JOIN Vehicules v ON r.vehicule_id_FK = v.vehicule_id
+    WHERE v.type = 'Navibus'
+) AS navibus_stops ON a.arret_id = navibus_stops.arret_id_FK
+ORDER BY a.nom_arret;
 
 
---requete 5 : Une requête pour trouver les arrêts desservis par des véhicules fluviaux (Navibus)
+
+
+
+
+--REQUETE 5 : Une requête pour trouver les arrêts desservis par des véhicules fluviaux (Navibus)
   --version 1 :
 SELECT DISTINCT a.arret_id, a.nom_arret
 FROM Arrets a
