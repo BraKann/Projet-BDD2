@@ -55,20 +55,6 @@ INSERT INTO Arrets 				 VALUES (8,	'Île de Nantes');
 INSERT INTO Arrets 				 VALUES (9,	'Université');
 INSERT INTO Arrets 				 VALUES (10,	'Hangar a Banane');
 
-
---VehiculeCapacite
-INSERT INTO VehiculeCapacite VALUES (250,	'Tramway');
-INSERT INTO VehiculeCapacite VALUES (250,	'Tramway');
-INSERT INTO VehiculeCapacite VALUES (250,	'Tramway');
-INSERT INTO VehiculeCapacite VALUES (50,	'Bus');
-INSERT INTO VehiculeCapacite VALUES (95,	'Navibus');
-INSERT INTO VehiculeCapacite VALUES (95,	'Navibus');
-INSERT INTO VehiculeCapacite VALUES (95,	'Navibus');
-INSERT INTO VehiculeCapacite VALUES (150,	'BusWay');
-INSERT INTO VehiculeCapacite VALUES (95,	'Navibus');
-INSERT INTO VehiculeCapacite VALUES (4,	'ProxiTan');
-INSERT INTO VehiculeCapacite VALUES (50,	'Bus');
-INSERT INTO VehiculeCapacite VALUES (150,	'BusWay');
 -- Reseaux
 
 INSERT INTO Reseaux 				 VALUES (1,	1,	101);
@@ -83,6 +69,21 @@ INSERT INTO Reseaux 				 VALUES (8,	7,	303);
 INSERT INTO Reseaux(ligne_id_FK,vehicule_id_FK) VALUES (	8,	501);
 INSERT INTO Reseaux 				 VALUES (9,	9,	202);
 INSERT INTO Reseaux 				 VALUES (10,	10,	402);
+
+
+--VehiculeCapacite on ne garde pas car on choisi la version pa décomposition
+INSERT INTO VehiculeCapacite VALUES (250,	'Tramway');
+INSERT INTO VehiculeCapacite VALUES (250,	'Tramway');
+INSERT INTO VehiculeCapacite VALUES (250,	'Tramway');
+INSERT INTO VehiculeCapacite VALUES (50,	'Bus');
+INSERT INTO VehiculeCapacite VALUES (95,	'Navibus');
+INSERT INTO VehiculeCapacite VALUES (95,	'Navibus');
+INSERT INTO VehiculeCapacite VALUES (95,	'Navibus');
+INSERT INTO VehiculeCapacite VALUES (150,	'BusWay');
+INSERT INTO VehiculeCapacite VALUES (95,	'Navibus');
+INSERT INTO VehiculeCapacite VALUES (4,	'ProxiTan');
+INSERT INTO VehiculeCapacite VALUES (50,	'Bus');
+INSERT INTO VehiculeCapacite VALUES (150,	'BusWay');
 
 
 
