@@ -1,6 +1,6 @@
 --REQUETE 1 : Recuperer tout les vehicules de plus de 100 de capacité qui passe par l'arret Commerce + une selection
   --version 1 : utilisation de JOIN
-SELECT v.vehicule_id, v.type, v.capacite, v.carburant 
+SELECT *
 FROM Vehicules v
 JOIN Reseaux r ON v.vehicule_id = r.vehicule_id_FK
 JOIN Arrets a ON r.arret_id_FK = a.arret_id
@@ -8,7 +8,7 @@ WHERE a.nom_arret = 'Commerce'
 AND v.capacite > 100;
   
   --version 2 : utilisation d'EXISTS
-SELECT v.vehicule_id, v.type, v.capacite, v.carburant
+SELECT *
 FROM Vehicules v
 WHERE v.capacite > 100
 AND EXISTS (
@@ -20,7 +20,7 @@ AND EXISTS (
 );
 
   --version 3 : utilisation d'une sous-requête avec IN
-SELECT v.vehicule_id, v.type, v.capacite, v.carburant
+SELECT *
 FROM Vehicules v
 WHERE v.capacite > 100
 AND v.vehicule_id IN (
