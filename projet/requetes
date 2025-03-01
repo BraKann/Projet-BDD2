@@ -5,12 +5,12 @@ FROM Vehicules v
 JOIN Reseaux r ON v.vehicule_id = r.vehicule_id_FK
 JOIN Arrets a ON r.arret_id_FK = a.arret_id
 WHERE a.nom_arret = 'Commerce'
-AND v.capacite > 100;
+AND v.capacite >= 100;
   
   --version 2 : utilisation d'EXISTS
 SELECT v.vehicule_id, v.vehicule_type, v.capacite, v.carburant
 FROM Vehicules v
-WHERE v.capacite > 100
+WHERE v.capacite >= 100
 AND EXISTS (
     SELECT 1
     FROM Reseaux r
@@ -22,7 +22,7 @@ AND EXISTS (
   --version 3 : utilisation d'une sous-requête avec IN
 SELECT v.vehicule_id, v.vehicule_type, v.capacite, v.carburant
 FROM Vehicules v
-WHERE v.capacite > 100
+WHERE v.capacite >= 100
 AND v.vehicule_id IN (
     SELECT r.vehicule_id_FK
     FROM Reseaux r, Arrets a
