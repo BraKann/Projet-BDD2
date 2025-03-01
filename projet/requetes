@@ -1,37 +1,45 @@
 --REQUETE 1 : Recuperer tout les vehicules de plus de 100 de capacité qui passe par l'arret Commerce + une selection
-  --version 1 : 
-SELECT vehicule_id,arret_nom
-FROM vehicule natural join arret
-WHERE arret_nom = "Commerce"
-  
-  --version 2 :
-SELECT v.vehicule_id, a.nom_arret
+  --version 1 : utilisation de JOIN
+SELECT v.vehicule_id, v.type, v.capacite, v.energie 
 FROM Vehicules v
 JOIN Reseaux r ON v.vehicule_id = r.vehicule_id_FK
 JOIN Arrets a ON r.arret_id_FK = a.arret_id
-WHERE a.nom_arret = 'Commerce';
-
-  --version 3 :
-  SELECT v.vehicule_id, 'Commerce' as nom_arret
+WHERE a.nom_arret = 'Commerce'
+AND v.capacite > 100;
+  
+  --version 2 : utilisation d'EXISTS
+SELECT v.vehicule_id, v.type, v.capacite, v.energie
 FROM Vehicules v
-WHERE v.vehicule_id IN (
-    SELECT r.vehicule_id_FK
+WHERE v.capacite > 100
+AND EXISTS (
+    SELECT 1
     FROM Reseaux r
     JOIN Arrets a ON r.arret_id_FK = a.arret_id
-    WHERE a.nom_arret = 'Commerce'
+    WHERE r.vehicule_id_FK = v.vehicule_id
+    AND a.nom_arret = 'Commerce'
+);
+
+  --version 3 : utilisation d'une sous-requête avec IN
+SELECT v.vehicule_id, v.type, v.capacite, v.energie
+FROM Vehicules v
+WHERE v.capacite > 100
+AND v.vehicule_id IN (
+    SELECT r.vehicule_id_FK
+    FROM Reseaux r, Arrets a
+    WHERE r.arret_id_FK = a.arret_id
+    AND a.nom_arret = 'Commerce'
 );
 
 
 
-
 --REQUETE 2 : Une requête pour trouver tous les véhicules électriques et leur capacité
-  --version 1 :
+  --version 1 : utilisation de ORDER BY
 SELECT v.vehicule_id, v.type, v.capacite, v.equipements
 FROM Vehicules v
 WHERE v.energie = 'Électrique'
 ORDER BY v.capacite DESC;
   
-  --version 2 :
+  --version 2 : utilisation d'une sous-requête avec AS 
 WITH vehicules_electriques AS (
     SELECT * FROM Vehicules
     WHERE energie = 'Électrique'
@@ -40,7 +48,7 @@ SELECT vehicule_id, type, capacite, equipements
 FROM vehicules_electriques
 ORDER BY capacite DESC;
 
-  --version 3 :
+  --version 3 : utilisation de GROUP BY, HAVING COUNT et ORDER BY
 SELECT 
     energie as type_energie, 
     SUM(1) as nombre_vehicules
@@ -54,13 +62,13 @@ ORDER BY nombre_vehicules DESC;
 
 
 --REQUETE 3 : Une requête pour compter le nombre de véhicules par type d'énergie
-  --version 1 :
+  --version 1 : utilisation de GROUP BY
 SELECT energie, COUNT(*) as nombre_vehicules
 FROM Vehicules
 GROUP BY energie
 ORDER BY nombre_vehicules DESC;
   
-  --version 2 :
+  --version 2 : utilisation d'une sous-requête
 SELECT 
     energie, 
     (SELECT COUNT(*) FROM Vehicules v2 WHERE v2.energie = v1.energie) as nombre
@@ -68,7 +76,7 @@ FROM Vehicules v1
 GROUP BY energie
 ORDER BY nombre DESC;
 
-  --version 3 :
+  --version 3 : utilisation de LEFT JOIN
 SELECT l.ligne_id, l.nom_ligne, l.type_voie, a.nom_arret, v.type, v.energie
 FROM Lignes l
 LEFT JOIN Reseaux r ON l.ligne_id = r.ligne_id_FK
@@ -83,7 +91,7 @@ ORDER BY l.ligne_id, a.nom_arret;
 
 
 --REQUETE 4 : Une requête pour lister toutes les lignes avec leurs arrêts et véhicules associés
-  --version 1 :
+  --version 1 : utilisation de JOIN
 SELECT l.ligne_id, l.nom_ligne, l.type_voie, a.nom_arret, v.type, v.energie
 FROM Lignes l
 JOIN Reseaux r ON l.ligne_id = r.ligne_id_FK
@@ -91,7 +99,7 @@ JOIN Arrets a ON r.arret_id_FK = a.arret_id
 JOIN Vehicules v ON r.vehicule_id_FK = v.vehicule_id
 ORDER BY l.ligne_id;
   
-  --version 2 :
+  --version 2 : utilisation de AND dans le WHERE
 SELECT 
     Lignes.ligne_id, 
     Lignes.nom_ligne, 
@@ -105,7 +113,7 @@ AND Arrets.arret_id = Reseaux.arret_id_FK
 AND Vehicules.vehicule_id = Reseaux.vehicule_id_FK
 ORDER BY Lignes.ligne_id;
 
-  --version 3 :
+  --version 3 : utilisation d'une sous requête et d'INNER JOIN
 SELECT DISTINCT a.arret_id, a.nom_arret
 FROM Arrets a
 INNER JOIN (
@@ -122,7 +130,7 @@ ORDER BY a.nom_arret;
 
 
 --REQUETE 5 : Une requête pour trouver les arrêts desservis par des véhicules fluviaux (Navibus)
-  --version 1 :
+  --version 1 : utilisation de JOIN
 SELECT DISTINCT a.arret_id, a.nom_arret
 FROM Arrets a
 JOIN Reseaux r ON a.arret_id = r.arret_id_FK
@@ -130,7 +138,7 @@ JOIN Vehicules v ON r.vehicule_id_FK = v.vehicule_id
 WHERE v.type = 'Navibus'
 ORDER BY a.nom_arret;
   
-  --version 2 :
+  --version 2 : utilisation de AND dans le WHERE
 SELECT DISTINCT Arrets.arret_id, Arrets.nom_arret
 FROM Arrets, Reseaux, Vehicules
 WHERE Arrets.arret_id = Reseaux.arret_id_FK
@@ -138,7 +146,7 @@ AND Reseaux.vehicule_id_FK = Vehicules.vehicule_id
 AND Vehicules.type = 'Navibus'
 ORDER BY Arrets.nom_arret;
 
-  --version 3 :
+  --version 3 : utilisation d'une sous requête et d'EXISTS
 SELECT DISTINCT a.arret_id, a.nom_arret
 FROM Arrets a
 WHERE EXISTS (
