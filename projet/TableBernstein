@@ -20,8 +20,7 @@ CREATE TABLE Vehicules (
 	vehicule_id 	NUMBER	PRIMARY KEY,
 	vehicule_type	VARCHAR2(20),
 	capacite	NUMBER,
-	carburant	VARCHAR2(15),
-	accessibilite	VARCHAR2(35)
+	carburant	VARCHAR2(15)
 );
 
 CREATE TABLE Lignes (
@@ -35,11 +34,6 @@ CREATE TABLE Arrets (
 	arret_nom	VARCHAR2(20)
 );
 
-CREATE TABLE VehiculeCapacite (
-	capacite	NUMBER PRIMARY KEY,
-	vehicule_type	VARCHAR2(20)
-);
-
 CREATE TABLE Reseaux (
 	arret_id_FK	NUMBER,
 	ligne_id_FK	NUMBER,
@@ -48,6 +42,12 @@ CREATE TABLE Reseaux (
 	CONSTRAINT fk_ligne FOREIGN KEY (ligne_id_FK) REFERENCES Lignes(ligne_id_FK),
 	CONSTRAINT fk_vehicule FOREIGN KEY (vehicule_id_FK) REFERENCES Vehicules(vehicule_id_FK)
 );
+
+-- à ne pas faire car algo par decomp choisi et pas bernstein
+--CREATE TABLE VehiculeCapacite (
+	--capacite	NUMBER PRIMARY KEY,
+	--vehicule_type	VARCHAR2(20)
+--);
 
 
 spool off
