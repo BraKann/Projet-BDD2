@@ -1,6 +1,6 @@
 --REQUETE 1 : Recuperer tout les vehicules de plus de 100 de capacité qui passe par l'arret Commerce + une selection
   --version 1 : utilisation de JOIN
-SELECT v.vehicule_id, v.type, v.capacite, v.energie 
+SELECT v.vehicule_id, v.type, v.capacite, v.carburant 
 FROM Vehicules v
 JOIN Reseaux r ON v.vehicule_id = r.vehicule_id_FK
 JOIN Arrets a ON r.arret_id_FK = a.arret_id
@@ -8,7 +8,7 @@ WHERE a.nom_arret = 'Commerce'
 AND v.capacite > 100;
   
   --version 2 : utilisation d'EXISTS
-SELECT v.vehicule_id, v.type, v.capacite, v.energie
+SELECT v.vehicule_id, v.type, v.capacite, v.carburant
 FROM Vehicules v
 WHERE v.capacite > 100
 AND EXISTS (
@@ -20,7 +20,7 @@ AND EXISTS (
 );
 
   --version 3 : utilisation d'une sous-requête avec IN
-SELECT v.vehicule_id, v.type, v.capacite, v.energie
+SELECT v.vehicule_id, v.type, v.capacite, v.carburant
 FROM Vehicules v
 WHERE v.capacite > 100
 AND v.vehicule_id IN (
@@ -36,13 +36,13 @@ AND v.vehicule_id IN (
   --version 1 : utilisation de ORDER BY
 SELECT v.vehicule_id, v.type, v.capacite, v.equipements
 FROM Vehicules v
-WHERE v.energie = 'Électrique'
+WHERE v.carburant = 'Électrique'
 ORDER BY v.capacite DESC;
   
   --version 2 : utilisation d'une sous-requête avec AS 
 WITH vehicules_electriques AS (
     SELECT * FROM Vehicules
-    WHERE energie = 'Électrique'
+    WHERE carburant = 'Électrique'
 )
 SELECT vehicule_id, type, capacite, equipements
 FROM vehicules_electriques
@@ -50,10 +50,10 @@ ORDER BY capacite DESC;
 
   --version 3 : utilisation de GROUP BY, HAVING COUNT et ORDER BY
 SELECT 
-    energie as type_energie, 
+    carburant as type_carburant, 
     SUM(1) as nombre_vehicules
 FROM Vehicules
-GROUP BY energie
+GROUP BY carburant
 HAVING COUNT(*) > 0
 ORDER BY nombre_vehicules DESC;
 
@@ -63,21 +63,21 @@ ORDER BY nombre_vehicules DESC;
 
 --REQUETE 3 : Une requête pour compter le nombre de véhicules par type d'énergie
   --version 1 : utilisation de GROUP BY
-SELECT energie, COUNT(*) as nombre_vehicules
+SELECT carburant, COUNT(*) as nombre_vehicules
 FROM Vehicules
-GROUP BY energie
+GROUP BY carburant
 ORDER BY nombre_vehicules DESC;
   
   --version 2 : utilisation d'une sous-requête
 SELECT 
-    energie, 
-    (SELECT COUNT(*) FROM Vehicules v2 WHERE v2.energie = v1.energie) as nombre
+    carburant, 
+    (SELECT COUNT(*) FROM Vehicules v2 WHERE v2.carburant = v1.carburant) as nombre
 FROM Vehicules v1
-GROUP BY energie
+GROUP BY carburant
 ORDER BY nombre DESC;
 
   --version 3 : utilisation de LEFT JOIN
-SELECT l.ligne_id, l.nom_ligne, l.type_voie, a.nom_arret, v.type, v.energie
+SELECT l.ligne_id, l.nom_ligne, l.type_voie, a.nom_arret, v.type, v.carburant
 FROM Lignes l
 LEFT JOIN Reseaux r ON l.ligne_id = r.ligne_id_FK
 LEFT JOIN Arrets a ON r.arret_id_FK = a.arret_id
@@ -92,7 +92,7 @@ ORDER BY l.ligne_id, a.nom_arret;
 
 --REQUETE 4 : Une requête pour lister toutes les lignes avec leurs arrêts et véhicules associés
   --version 1 : utilisation de JOIN
-SELECT l.ligne_id, l.nom_ligne, l.type_voie, a.nom_arret, v.type, v.energie
+SELECT l.ligne_id, l.nom_ligne, l.type_voie, a.nom_arret, v.type, v.carburant
 FROM Lignes l
 JOIN Reseaux r ON l.ligne_id = r.ligne_id_FK
 JOIN Arrets a ON r.arret_id_FK = a.arret_id
@@ -106,7 +106,7 @@ SELECT
     Lignes.type_voie, 
     Arrets.nom_arret, 
     Vehicules.type, 
-    Vehicules.energie
+    Vehicules.carburant
 FROM Lignes, Reseaux, Arrets, Vehicules
 WHERE Lignes.ligne_id = Reseaux.ligne_id_FK
 AND Arrets.arret_id = Reseaux.arret_id_FK
