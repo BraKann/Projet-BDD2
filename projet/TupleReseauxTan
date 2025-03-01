@@ -72,18 +72,18 @@ INSERT INTO Reseaux 				 VALUES (10,	10,	402);
 
 
 --VehiculeCapacite on ne garde pas car on choisi la version pa décomposition
-INSERT INTO VehiculeCapacite VALUES (250,	'Tramway');
-INSERT INTO VehiculeCapacite VALUES (250,	'Tramway');
-INSERT INTO VehiculeCapacite VALUES (250,	'Tramway');
-INSERT INTO VehiculeCapacite VALUES (50,	'Bus');
-INSERT INTO VehiculeCapacite VALUES (95,	'Navibus');
-INSERT INTO VehiculeCapacite VALUES (95,	'Navibus');
-INSERT INTO VehiculeCapacite VALUES (95,	'Navibus');
-INSERT INTO VehiculeCapacite VALUES (150,	'BusWay');
-INSERT INTO VehiculeCapacite VALUES (95,	'Navibus');
-INSERT INTO VehiculeCapacite VALUES (4,	'ProxiTan');
-INSERT INTO VehiculeCapacite VALUES (50,	'Bus');
-INSERT INTO VehiculeCapacite VALUES (150,	'BusWay');
+--INSERT INTO VehiculeCapacite VALUES (250,	'Tramway');
+--INSERT INTO VehiculeCapacite VALUES (250,	'Tramway');
+--INSERT INTO VehiculeCapacite VALUES (250,	'Tramway');
+--INSERT INTO VehiculeCapacite VALUES (50,	'Bus');
+--INSERT INTO VehiculeCapacite VALUES (95,	'Navibus');
+--INSERT INTO VehiculeCapacite VALUES (95,	'Navibus');
+--INSERT INTO VehiculeCapacite VALUES (95,	'Navibus');
+--INSERT INTO VehiculeCapacite VALUES (150,	'BusWay');
+--INSERT INTO VehiculeCapacite VALUES (95,	'Navibus');
+--INSERT INTO VehiculeCapacite VALUES (4,	'ProxiTan');
+--INSERT INTO VehiculeCapacite VALUES (50,	'Bus');
+--INSERT INTO VehiculeCapacite VALUES (150,	'BusWay');
 
 
 
