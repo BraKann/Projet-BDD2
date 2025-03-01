@@ -14,18 +14,18 @@ prompt *************************************************************
 prompt ******************** INSERT TUPLES **************************
 prompt *************************************************************
 -- Vehicules
-INSERT INTO Vehicules VALUES (101,	'Tramway',	250,	'Électrique',		'Rampe d’accès');
-INSERT INTO Vehicules VALUES (102,	'Tramway',	250,	'Électrique',		'Rampe d’accès');
-INSERT INTO Vehicules VALUES (102,	'Tramway',	250,	'Électrique',		'Rampe d’accès');
-INSERT INTO Vehicules VALUES (201,	'Bus',		50,	'Gaz_Naturel',		'Rampe d’accès');
-INSERT INTO Vehicules VALUES (301,	'Navibus',	95,	'Diesel',		'Rampe d’accès');
-INSERT INTO Vehicules VALUES (301,	'Navibus',	95,	'Diesel',		'Rampe d’accès');
-INSERT INTO Vehicules VALUES (302,	'Navibus',	95,	'Hydrogène',		'Rampe d’accès');
-INSERT INTO Vehicules VALUES (401,	'BusWay',	150,	'Électrique',		'Rampe d’accès, WiFi');
-INSERT INTO Vehicules VALUES (303,	'Navibus',	95,	'Électrique',		'Rampe d’accès');
-INSERT INTO Vehicules VALUES (501,	'ProxiTan',	4,	'Diesel',		'Rampe d’accès, Espace fauteuil,Ascenseur');
-INSERT INTO Vehicules VALUES (202,	'Bus',		50,	'Gaz_Naturel',		'Rampe d’accès');
-INSERT INTO Vehicules VALUES (402,	'BusWay',	150,	'Électrique',		'Rampe d’accès, WiFi');
+INSERT INTO Vehicules VALUES (101,	'Tramway',	250,	'Électrique');
+INSERT INTO Vehicules VALUES (102,	'Tramway',	250,	'Électrique');
+INSERT INTO Vehicules VALUES (102,	'Tramway',	250,	'Électrique');
+INSERT INTO Vehicules VALUES (201,	'Bus',		50,	'Gaz_Naturel');
+INSERT INTO Vehicules VALUES (301,	'Navibus',	95,	'Diesel');
+INSERT INTO Vehicules VALUES (301,	'Navibus',	95,	'Diesel');
+INSERT INTO Vehicules VALUES (302,	'Navibus',	95,	'Hydrogène');
+INSERT INTO Vehicules VALUES (401,	'BusWay',	150,	'Électrique');
+INSERT INTO Vehicules VALUES (303,	'Navibus',	95,	'Électrique');
+INSERT INTO Vehicules VALUES (501,	'ProxiTan',	4,	'Diesel');
+INSERT INTO Vehicules VALUES (202,	'Bus',		50,	'Gaz_Naturel');
+INSERT INTO Vehicules VALUES (402,	'BusWay',	150,	'Électrique');
 
 --Lignes
 
