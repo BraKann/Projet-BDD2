@@ -3,8 +3,9 @@
         {
             "previewLimit": 50,
             "driver": "SQLite",
-            "name": "SQLite Connection",
-            "database": "C:/path/to/mydatabase.db"
+            "name": "oaui",
+            "database": "main",
+            "group": "sqlite"
         }
     ],
     "sqltools.useNodeRuntime": true

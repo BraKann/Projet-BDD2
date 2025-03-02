@@ -22,7 +22,6 @@ CREATE TABLE LIGNE (
     ligne_type VARCHAR(50),
 
     PRIMARY KEY (ligne_id)
-    --CONSTRAINT pk_reseauxtan PRIMARY KEY(ligne_id,arret_id,vehicle_id)
 );
 
 CREATE TABLE VEHICULE (
@@ -30,7 +29,6 @@ CREATE TABLE VEHICULE (
     vehicule_type VARCHAR(50),
     capacite NUMBER,
     carburant VARCHAR(50),
-    accessibilite VARCHAR(255),
 
     PRIMARY KEY (vehicule_id)
 );
