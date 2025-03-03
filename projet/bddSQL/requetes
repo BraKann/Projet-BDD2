@@ -164,6 +164,9 @@ AND RESEAUX.vehicule_id = VEHICULE.vehicule_id
 AND VEHICULE.vehicule_type = 'Navibus'
 ORDER BY ARRET.arret_nom;
 
+-- je crois qu'ici tu as utilisé a.arret_id, ... dans le select qui n'a
+-- pas de référence dabs From
+-- je te propose de mettre "a" devant ARRET dans from et de reverifier
   --version 3 : utilisation d'une sous requête et d'EXISTS
 SELECT DISTINCT a.arret_id, a.arret_nom
 FROM ARRET a
