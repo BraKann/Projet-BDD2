@@ -116,6 +116,22 @@ WHERE ligne_id = RESEAUX.ligne_id
 AND arret_id = RESEAUX.arret_id
 AND vehicule_id = RESEAUX.vehicule_id
 ORDER BY ligne_id;
+
+--correction de l'erreur: je crois qu'il y'aurait entre le select et le from
+-- voici la nouvelle version 
+SELECT 
+    l.ligne_id, 
+    l.ligne_nom, 
+    l.ligne_type, 
+    a.arret_nom, 
+    v.vehicule_type, 
+    v.carburant
+FROM LIGNE l, RESEAUX r, ARRET a, VEHICULE v
+WHERE l.ligne_id = r.ligne_id
+AND a.arret_id = r.arret_id
+AND v.vehicule_id = r.vehicule_id
+ORDER BY l.ligne_id;
+
   
   --version 3 : utilisation d'une sous requête et d'INNER JOIN
 SELECT l.ligne_id, l.ligne_nom, l.ligne_type, a.arret_nom, v.vehicule_type, v.carburant
