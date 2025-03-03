@@ -48,8 +48,15 @@ SELECT vehicule_id, vehicule_type, capacite, carburant
 FROM vehicules_electriques
 ORDER BY capacite DESC;
 
-  --version 3 :
- 
+  --version 3 : en utilisant une jointure
+ SELECT v.vehicule_id, v.vehicule_type, v.capacite, v.carburant
+FROM (
+    SELECT vehicule_id, vehicule_type, capacite, carburant
+    FROM VEHICULE
+    WHERE carburant = 'Électrique'
+) AS v
+ORDER BY v.capacite DESC;
+
 
 
 
