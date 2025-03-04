@@ -1,31 +1,31 @@
 --REQUETE 1 : Recuperer tout les vehicules de plus de 100 de capacité qui passe par l'arret Commerce + une selection
   --version 1 : utilisation de JOIN
-SELECT v.vehicule_id, v.vehicule_type, v.capacite, v.carburant
-FROM VEHICULE v
-JOIN Reseaux r ON v.vehicule_id = r.vehicule_id
-JOIN ARRET a ON r.arret_id = a.arret_id
-WHERE a.arret_nom = 'Commerce'
-AND v.capacite >= 100;
+SELECT vehicule_id, vehicule_type, capacite, carburant
+FROM (Vehicules v
+JOIN Reseaux r ON v.vehicule_id = r.vehicule_id) AS vr
+JOIN Arrets a ON vr.arret_id = a.arret_id
+WHERE arret_nom = 'Commerce'
+AND capacite >= 100;
   
   --version 2 : utilisation d'EXISTS
-SELECT v.vehicule_id, v.vehicule_type, v.capacite, v.carburant
-FROM VEHICULE v
+SELECT vehicule_id, vehicule_type, capacite, carburant
+FROM Vehicules v
 WHERE v.capacite >= 100
 AND EXISTS (
     SELECT 1
-    FROM RESEAUX r
-    JOIN ARRET a ON r.arret_id = a.arret_id
-    WHERE r.vehicule_id = v.vehicule_id
-    AND a.arret_nom = 'Commerce'
+    FROM (Reseaux r
+    JOIN Arrets a ON r.arret_id = a.arret_id) AS ra
+    WHERE v.vehicule_id = ra.vehicule_id
+    AND arret_nom = 'Commerce'
 );
 
   --version 3 : utilisation d'une sous-requête avec IN
-SELECT v.vehicule_id, v.vehicule_type, v.capacite, v.carburant
-FROM VEHICULE v
+SELECT vehicule_id, vehicule_type, capacite, carburant
+FROM Vehicules v
 WHERE v.capacite >= 100
 AND v.vehicule_id IN (
-    SELECT r.vehicule_id
-    FROM Reseaux r, ARRET a
+    SELECT vehicule_id
+    FROM Reseaux r, Arrets a
     WHERE r.arret_id = a.arret_id
     AND a.arret_nom = 'Commerce'
 );
@@ -34,14 +34,14 @@ AND v.vehicule_id IN (
 
 --REQUETE 2 : Une requête pour trouver tous les véhicules électriques et leur capacité
   --version 1 : utilisation de ORDER BY
-SELECT v.vehicule_id, v.vehicule_type, v.capacite, v.carburant
-FROM VEHICULE v
-WHERE v.carburant = 'Électrique'
-ORDER BY v.capacite DESC;
+SELECT vehicule_id, vehicule_type, capacite, carburant
+FROM Vehicules 
+WHERE carburant = 'Électrique'
+ORDER BY capacite DESC;
   
   --version 2 : utilisation d'une sous-requête avec AS 
 WITH vehicules_electriques AS (
-    SELECT * FROM VEHICULE
+    SELECT * FROM Vehicules
     WHERE carburant = 'Électrique'
 )
 SELECT vehicule_id, vehicule_type, capacite, carburant
@@ -49,10 +49,10 @@ FROM vehicules_electriques
 ORDER BY capacite DESC;
 
   --version 3 : en utilisant une jointure
- SELECT v.vehicule_id, v.vehicule_type, v.capacite, v.carburant
+ SELECT vehicule_id, vehicule_type, capacite, carburant
 FROM (
     SELECT vehicule_id, vehicule_type, capacite, carburant
-    FROM VEHICULE
+    FROM Vehicules
     WHERE carburant = 'Électrique'
 ) AS v
 ORDER BY v.capacite DESC;
@@ -66,15 +66,15 @@ ORDER BY v.capacite DESC;
 --REQUETE 3 : Une requête pour compter le nombre de véhicules par type d'énergie
   --version 1 : utilisation de GROUP BY
 SELECT carburant, COUNT(*) as nombre_vehicules
-FROM VEHICULE
+FROM Vehicules
 GROUP BY carburant
 ORDER BY nombre_vehicules DESC;
   
   --version 2 : utilisation d'une sous-requête
 SELECT 
     carburant, 
-    (SELECT COUNT(*) FROM VEHICULE v2 WHERE v2.carburant = v1.carburant) as nombre
-FROM VEHICULE v1
+    (SELECT COUNT(*) FROM Vehicules v2 WHERE v2.carburant = v1.carburant) as nombre
+FROM Vehicules v1
 GROUP BY carburant
 ORDER BY nombre DESC;
 
@@ -95,12 +95,12 @@ ORDER BY nombre_vehicules DESC;
 
 --REQUETE 4 : Une requête pour lister toutes les lignes avec leurs arrêts et véhicules associés
   --version 1 : utilisation de JOIN
-SELECT l.ligne_id, l.ligne_nom, l.ligne_type, a.arret_nom, v.vehicule_type, v.carburant
-FROM LIGNE l
-JOIN RESEAUX r ON l.ligne_id = r.ligne_id
-JOIN ARRET a ON r.arret_id = a.arret_id
-JOIN VEHICULE v ON r.vehicule_id = v.vehicule_id
-ORDER BY l.ligne_id;
+SELECT ligne_id, ligne_nom, ligne_type, arret_nom, vehicule_type, carburant
+FROM (((LIGNE l
+JOIN Reseaux r ON l.ligne_id = r.ligne_id) AS lr
+JOIN Arrets a ON lr.arret_id = a.arret_id) as lra
+JOIN Vehicules v ON lra.vehicule_id = v.vehicule_id) AS lrav
+ORDER BY lrav.ligne_id;
 
   --!version 2 : utilisation de AND dans le WHERE
   --! erreur que je ne comprend pas
@@ -109,12 +109,12 @@ SELECT
     ligne_nom, 
     ligne_type, 
     arret_nom, 
-    vehicule_type, 
+    Vehicules_type, 
     carburant
-FROM LIGNE, RESEAUX, ARRET, VEHICULE
-WHERE ligne_id = RESEAUX.ligne_id
-AND arret_id = RESEAUX.arret_id
-AND vehicule_id = RESEAUX.vehicule_id
+FROM LIGNE, Reseaux, Arrets, Vehicules
+WHERE ligne_id = Reseaux.ligne_id
+AND arret_id = Reseaux.arret_id
+AND vehicule_id = Reseaux.vehicule_id
 ORDER BY ligne_id;
 
 --correction de l'erreur: je crois qu'il y'aurait entre le select et le from
@@ -126,7 +126,7 @@ SELECT
     a.arret_nom, 
     v.vehicule_type, 
     v.carburant
-FROM LIGNE l, RESEAUX r, ARRET a, VEHICULE v
+FROM LIGNE l, Reseaux r, Arrets a, Vehicules v
 WHERE l.ligne_id = r.ligne_id
 AND a.arret_id = r.arret_id
 AND v.vehicule_id = r.vehicule_id
@@ -136,9 +136,9 @@ ORDER BY l.ligne_id;
   --version 3 : utilisation d'une sous requête et d'INNER JOIN
 SELECT l.ligne_id, l.ligne_nom, l.ligne_type, a.arret_nom, v.vehicule_type, v.carburant
 FROM LIGNE l
-LEFT JOIN RESEAUX r ON l.ligne_id = r.ligne_id
-LEFT JOIN ARRET a ON r.arret_id = a.arret_id
-LEFT JOIN VEHICULE v ON r.vehicule_id = v.vehicule_id
+LEFT JOIN Reseaux r ON l.ligne_id = r.ligne_id
+LEFT JOIN Arrets a ON r.arret_id = a.arret_id
+LEFT JOIN Vehicules v ON r.vehicule_id = v.vehicule_id
 WHERE r.ligne_id IS NOT NULL
 ORDER BY l.ligne_id, a.arret_nom;
 
@@ -149,30 +149,30 @@ ORDER BY l.ligne_id, a.arret_nom;
 --REQUETE 5 : Une requête pour trouver les arrêts desservis par des véhicules fluviaux (Navibus)
   --version 1 : utilisation de JOIN
 SELECT DISTINCT a.arret_id, a.arret_nom
-FROM ARRET a
-JOIN RESEAUX r ON a.arret_id = r.arret_id
-JOIN VEHICULE v ON r.vehicule_id = v.vehicule_id
+FROM Arrets a
+JOIN Reseaux r ON a.arret_id = r.arret_id
+JOIN Vehicules v ON r.vehicule_id = v.vehicule_id
 WHERE v.vehicule_type = 'Navibus'
 ORDER BY a.arret_nom;
   
   --version 2 : utilisation de AND dans le WHERE
   --!Erreur que je comprend pas
 SELECT DISTINCT a.arret_id, a.arret_nom
-FROM ARRET, RESEAUX, VEHICULE
-WHERE ARRET.arret_id = RESEAUX.arret_id
-AND RESEAUX.vehicule_id = VEHICULE.vehicule_id
-AND VEHICULE.vehicule_type = 'Navibus'
-ORDER BY ARRET.arret_nom;
+FROM Arrets, Reseaux, Vehicules
+WHERE Arrets.arret_id = Reseaux.arret_id
+AND Reseaux.vehicule_id = Vehicules.vehicule_id
+AND Vehicules.vehicule_type = 'Navibus'
+ORDER BY Arrets.arret_nom;
 
 -- je crois qu'ici tu as utilisé a.arret_id, ... dans le select qui n'a
 -- pas de référence dabs From
--- je te propose de mettre "a" devant ARRET dans from et de reverifier
+-- je te propose de mettre "a" devant Arrets dans from et de reverifier
   --version 3 : utilisation d'une sous requête et d'EXISTS
 SELECT DISTINCT a.arret_id, a.arret_nom
-FROM ARRET a
+FROM Arrets a
 WHERE EXISTS (
-    SELECT 1 FROM RESEAUX r
-    JOIN VEHICULE v ON r.vehicule_id = v.vehicule_id
+    SELECT 1 FROM Reseaux r
+    JOIN Vehicules v ON r.vehicule_id = v.vehicule_id
     WHERE r.arret_id = a.arret_id AND v.vehicule_type = 'Navibus'
 )
 ORDER BY a.arret_nom;
