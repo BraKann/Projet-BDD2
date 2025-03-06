@@ -6,6 +6,7 @@ prompt *************************************************************
 prompt ******************** DROP TABLE *****************************
 prompt *************************************************************
 
+  -- ajouter un if exists
 DROP TABLE RESEAUX CASCADE CONSTRAINTS;
 DROP TABLE VEHICULE CASCADE CONSTRAINTS;
 DROP TABLE LIGNE CASCADE CONSTRAINTS;
