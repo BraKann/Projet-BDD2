@@ -42,7 +42,7 @@ SELECT * FROM table(dbms_xplan.display);
 EXPLAIN PLAN FOR
 SELECT v.vehicule_id, v.vehicule_type, v.capacite, v.carburant
 FROM VEHICULE v
-WHERE v.carburant = 'Électrique'
+WHERE v.carburant = 'electrique'
 ORDER BY v.capacite DESC;
 SELECT * FROM table(dbms_xplan.display);
   
@@ -50,7 +50,7 @@ SELECT * FROM table(dbms_xplan.display);
 EXPLAIN PLAN FOR
 WITH vehicules_electriques AS (
     SELECT * FROM VEHICULE
-    WHERE carburant = 'Électrique'
+    WHERE carburant = 'electrique'
 )
 SELECT vehicule_id, vehicule_type, capacite, carburant
 FROM vehicules_electriques
@@ -64,7 +64,7 @@ FROM (
     SELECT vehicule_id, vehicule_type, capacite, carburant,
            ROW_NUMBER() OVER (ORDER BY capacite DESC) as rn
     FROM VEHICULE
-    WHERE carburant = 'Électrique'
+    WHERE carburant = 'electrique'
 ) v
 WHERE rn > 0;
 SELECT * FROM table(dbms_xplan.display); 
