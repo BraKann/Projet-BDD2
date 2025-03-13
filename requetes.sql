@@ -122,20 +122,19 @@ ORDER BY l.ligne_id;
 SELECT * FROM table(dbms_xplan.display);
 
   --!version 2 : utilisation de AND dans le WHERE
-  --! erreur que je ne comprend pas
 EXPLAIN PLAN FOR
 SELECT 
-    ligne_id, 
-    ligne_nom, 
-    ligne_type, 
-    arret_nom, 
-    vehicule_type, 
-    carburant
-FROM LIGNE, RESEAUX, ARRET, VEHICULE
-WHERE ligne_id = RESEAUX.ligne_id
-AND arret_id = RESEAUX.arret_id
-AND vehicule_id = RESEAUX.vehicule_id
-ORDER BY ligne_id;
+    l.ligne_id, 
+    l.ligne_nom, 
+    l.ligne_type, 
+    a.arret_nom, 
+    v.vehicule_type, 
+    v.carburant
+FROM LIGNE l, RESEAUX r, ARRET a, VEHICULE v
+WHERE l.ligne_id = r.ligne_id
+AND a.arret_id = r.arret_id
+AND v.vehicule_id = r.vehicule_id
+ORDER BY l.ligne_id;
 SELECT * FROM table(dbms_xplan.display);
   
   --version 3 : utilisation d'une sous requête et d'INNER JOIN
@@ -165,14 +164,13 @@ ORDER BY a.arret_nom;
 SELECT * FROM table(dbms_xplan.display);
   
   --version 2 : utilisation de AND dans le WHERE
-  --!Erreur que je comprend pas
 EXPLAIN PLAN FOR
 SELECT DISTINCT a.arret_id, a.arret_nom
-FROM ARRET, RESEAUX, VEHICULE
-WHERE ARRET.arret_id = RESEAUX.arret_id
+FROM ARRET a, RESEAUX, VEHICULE
+WHERE a.arret_id = RESEAUX.arret_id
 AND RESEAUX.vehicule_id = VEHICULE.vehicule_id
 AND VEHICULE.vehicule_type = 'Navibus'
-ORDER BY ARRET.arret_nom;
+ORDER BY a.arret_nom;
 SELECT * FROM table(dbms_xplan.display);
 
   --version 3 : utilisation d'une sous requête et d'EXISTS
