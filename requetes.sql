@@ -57,8 +57,17 @@ FROM vehicules_electriques
 ORDER BY capacite DESC;
 SELECT * FROM table(dbms_xplan.display);
 
-  --version 3 :
- 
+  --version 3 : utilisation de ROW_NUMBER()
+EXPLAIN PLAN FOR
+SELECT vehicule_id, vehicule_type, capacite, carburant
+FROM (
+    SELECT vehicule_id, vehicule_type, capacite, carburant,
+           ROW_NUMBER() OVER (ORDER BY capacite DESC) as rn
+    FROM VEHICULE
+    WHERE carburant = 'Électrique'
+) v
+WHERE rn > 0;
+SELECT * FROM table(dbms_xplan.display); 
 
 
 
