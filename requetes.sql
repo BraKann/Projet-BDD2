@@ -110,7 +110,7 @@ SELECT * FROM table(dbms_xplan.display);
 
 
 
---REQUETE 4 : Une requête pour lister toutes les lignes avec leurs arrêts et véhicules associés
+--REQUETE 4 : Une requête pour lister toutes les lignes avec leurs arrêts et véhicules associés (trop longue à cature pour le résultat)
   --version 1 : utilisation de JOIN
 EXPLAIN PLAN FOR
 SELECT l.ligne_id, l.ligne_nom, l.ligne_type, a.arret_nom, v.vehicule_type, v.carburant
