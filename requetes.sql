@@ -89,7 +89,7 @@ EXPLAIN PLAN FOR
 SELECT 
     carburant as type_carburant, 
     SUM(1) as nombre_vehicules
-FROM Vehicules
+FROM VEHICULE
 GROUP BY carburant
 HAVING COUNT(*) > 0
 ORDER BY nombre_vehicules DESC;
