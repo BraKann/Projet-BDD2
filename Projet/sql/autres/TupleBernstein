@@ -1,0 +1,90 @@
+-- @insertion_decomposition.sql
+spool insertion_decomposition.log
+
+prompt *************************************************************
+prompt ******************** DELETE TABLE *****************************
+prompt *************************************************************
+
+DELETE FROM Vehicules;
+DELETE FROM Lignes;
+DELETE FROM Arrets;
+DELETE FROM Reseaux;
+
+prompt *************************************************************
+prompt ******************** INSERT TUPLES **************************
+prompt *************************************************************
+-- Vehicules
+INSERT INTO Vehicules VALUES (101,	'Tramway',	250,	'Électrique');
+INSERT INTO Vehicules VALUES (102,	'Tramway',	250,	'Électrique');
+INSERT INTO Vehicules VALUES (102,	'Tramway',	250,	'Électrique');
+INSERT INTO Vehicules VALUES (201,	'Bus',		50,	'Gaz_Naturel');
+INSERT INTO Vehicules VALUES (301,	'Navibus',	95,	'Diesel');
+INSERT INTO Vehicules VALUES (301,	'Navibus',	95,	'Diesel');
+INSERT INTO Vehicules VALUES (302,	'Navibus',	95,	'Hydrogène');
+INSERT INTO Vehicules VALUES (401,	'BusWay',	150,	'Électrique');
+INSERT INTO Vehicules VALUES (303,	'Navibus',	95,	'Électrique');
+INSERT INTO Vehicules VALUES (501,	'ProxiTan',	4,	'Diesel');
+INSERT INTO Vehicules VALUES (202,	'Bus',		50,	'Gaz_Naturel');
+INSERT INTO Vehicules VALUES (402,	'BusWay',	150,	'Électrique');
+
+--Lignes
+
+INSERT INTO LIGNE VALUES (1,'Ligne 1','Rail');
+INSERT INTO LIGNE VALUES (2,'Ligne 2','Rail');
+INSERT INTO LIGNE VALUES (3,'C5','Route');
+INSERT INTO LIGNE VALUES (4,'N1','Fluviales');
+INSERT INTO LIGNE VALUES (5,'N3','Fluviales');
+INSERT INTO LIGNE VALUES (6,'Ligne 4','Route');
+INSERT INTO LIGNE VALUES (7,'N2','Fluviales');
+INSERT INTO LIGNE VALUES (8,'Déplacement dédié','Route');
+INSERT INTO LIGNE VALUES (9,'12','Route');
+INSERT INTO LIGNE VALUES (10,'Ligne 5','Route');
+
+
+-- Arrets
+
+INSERT INTO Arrets 				 VALUES (1,	'Commerce');
+INSERT INTO Arrets 				 VALUES (3,	'Hôtel Dieu');
+INSERT INTO Arrets 				 VALUES (2,	'Beaujoire');
+INSERT INTO Arrets 				 VALUES (3,	'Hôtel Dieu');
+INSERT INTO Arrets 				 VALUES (4,	'Gare Maritime');
+INSERT INTO Arrets				 VALUES (5,	'Trentemoult');
+INSERT INTO Arrets 				 VALUES (6,	'Gare Sud');
+INSERT INTO Arrets 				 VALUES (7,	'Hôtel de Région');
+INSERT INTO Arrets 				 VALUES (8,	'Île de Nantes');
+INSERT INTO Arrets 				 VALUES (9,	'Université');
+INSERT INTO Arrets 				 VALUES (10,	'Hangar a Banane');
+
+-- Reseaux
+
+INSERT INTO Reseaux 				 VALUES (1,	1,	101);
+INSERT INTO Reseaux 				 VALUES (3,	1,	102);
+INSERT INTO Reseaux 				 VALUES (2,	2,	102);
+INSERT INTO Reseaux 				 VALUES (3,	3,	201);
+INSERT INTO Reseaux 				 VALUES (4,	4,	301);
+INSERT INTO Reseaux				   VALUES (5,	4,	301);
+INSERT INTO Reseaux 				 VALUES (6,	5,	302);
+INSERT INTO Reseaux 				 VALUES (7,	6,	401);
+INSERT INTO Reseaux 				 VALUES (8,	7,	303);
+INSERT INTO Reseaux(ligne_id_FK,vehicule_id_FK) VALUES (	8,	501);
+INSERT INTO Reseaux 				 VALUES (9,	9,	202);
+INSERT INTO Reseaux 				 VALUES (10,	10,	402);
+
+
+--VehiculeCapacite on ne garde pas car on choisi la version pa décomposition
+--INSERT INTO VehiculeCapacite VALUES (250,	'Tramway');
+--INSERT INTO VehiculeCapacite VALUES (250,	'Tramway');
+--INSERT INTO VehiculeCapacite VALUES (250,	'Tramway');
+--INSERT INTO VehiculeCapacite VALUES (50,	'Bus');
+--INSERT INTO VehiculeCapacite VALUES (95,	'Navibus');
+--INSERT INTO VehiculeCapacite VALUES (95,	'Navibus');
+--INSERT INTO VehiculeCapacite VALUES (95,	'Navibus');
+--INSERT INTO VehiculeCapacite VALUES (150,	'BusWay');
+--INSERT INTO VehiculeCapacite VALUES (95,	'Navibus');
+--INSERT INTO VehiculeCapacite VALUES (4,	'ProxiTan');
+--INSERT INTO VehiculeCapacite VALUES (50,	'Bus');
+--INSERT INTO VehiculeCapacite VALUES (150,	'BusWay');
+
+
+
+spool off
