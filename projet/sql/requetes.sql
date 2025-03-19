@@ -1,3 +1,5 @@
+spool explainRequetes.txt
+
 --REQUETE 1 : Recuperer tout les vehicules de plus de 100 de capacité qui passe par l'arret Commerce + une selection
   --version 1 : utilisation de JOIN
 EXPLAIN PLAN FOR SELECT v.vehicule_id, v.vehicule_type, v.capacite, v.carburant
@@ -184,3 +186,6 @@ WHERE EXISTS (
 )
 ORDER BY a.arret_nom;
 SELECT * FROM table(dbms_xplan.display);
+
+
+spool off
