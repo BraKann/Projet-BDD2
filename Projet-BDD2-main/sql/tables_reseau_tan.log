@@ -1,0 +1,31 @@
+*************************************************************
+******************** DROP TABLE *****************************
+*************************************************************
+SP2-0734: unknown command beginning "IF EXISTS ..." - rest of line ignored.
+
+Table dropped.
+
+
+Table dropped.
+
+
+Table dropped.
+
+*************************************************************
+******************** CREATE TABLE ***************************
+*************************************************************
+
+Table created.
+
+
+Table created.
+
+
+Table created.
+
+CREATE TABLE RESEAUX (
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
