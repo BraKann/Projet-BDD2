@@ -1,8 +1,0 @@
-BD : reseaux tan
-Tables : Véhicule, stations, lignes, horaires, lignes-stations
-
-je suis pas sur pour les cardinalités sur le schema EA
-
-rajouter des tuples pour faire des requetes plus complex 
-
-pour lancer des requetes sql jai installer sqlite3 et l'extension vscode sqltools si vous avez mieux je suis chaud je sais pas si on peut avoir acces a oracles depuis nos pc 
